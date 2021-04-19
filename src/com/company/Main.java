@@ -62,35 +62,21 @@ class RegionalDep {
     }
 
 
-    void searchStudents(List<Participant> participantList, int criteriaNum) {
-        Scanner sc = new Scanner(System.in);
-        boolean done = true;
-        switch (criteriaNum) {
-            case 1: {
-                System.out.println("Input name of participant: ");
-                String searchName = sc.nextLine();
-                for (Participant participant : participantList) {
-                    if (participant.name.equals(searchName)) {
-                        participant.show();
-                        break;
-                    } else done = false;
-                }
-            }
-            break;
+   List<Participant> searchParticipant(Predicate<Participant> condition) {
+        List<Participant> result = new ArrayList<>();
 
-            case 2: {
-                System.out.println("Input region of participant: ");
-                int searchRegion = sc.nextInt();
-                for (Participant participant : participantList) {
-                    if (participant.region.equals(searchRegion)) {
-                        participant.show();
-                        break;
-                    } else done = false;
-                }
+        for (Participant temp : participantList) {
+            if (condition.test(temp) == true) {
+                result.add(temp);
+
             }
-            break;
         }
+
+        return result;
+
+
     }
+
 
 
     public void show(List<Participant> participantList) {
